@@ -213,7 +213,7 @@ func saveTask(filePath string, tasks []*Task) error {
 }
 
 func main() {
-	file, err := os.Open("./tasks.json")
+	file, err := os.OpenFile("./tasks.json", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Println("Error opening the JSON file: ", err)
 	}
@@ -228,6 +228,10 @@ func main() {
 	if err != nil {
 		fmt.Println("Failed to parse \"tasks.json\":", err)
 		return
+	}
+
+	if (len(os.Args)) < 2 {
+		fmt.Println(help)
 	}
 
 	command := os.Args[1]
