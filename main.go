@@ -212,21 +212,47 @@ func saveTask(filePath string, tasks []*Task) error {
 	return nil
 }
 
-func main() {
+func handleFile() ([]byte, error) {
 	file, err := os.OpenFile("./tasks.json", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
-		fmt.Println("Error opening the JSON file: ", err)
+		return nil, err
 	}
 	defer file.Close()
 
+	info, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
+
+	if info.Size() == 0 {
+		_, err = file.Write([]byte("[]"))
+		if err != nil {
+			fmt.Println("Error initializing file with an empty array:", err)
+			return nil, err
+		}
+		fmt.Println("Initialized the file with an empty array.")
+	} else {
+		fmt.Println("File already has data or is not empty.")
+	}
+
 	bytes, err := io.ReadAll(file)
 	if err != nil {
-		fmt.Println("Error reading the JSON file: ", err)
+		return nil, err
 	}
-	// taskData is an embedded file
+	return bytes, nil
+}
+
+func main() {
+	bytes, err := handleFile()
+	if err != nil {
+		fmt.Println("Failed to read or create \"tasks.json\":", err)
+		return
+	}
+
 	err = json.Unmarshal(bytes, &tasks)
 	if err != nil {
 		fmt.Println("Failed to parse \"tasks.json\":", err)
+		fmt.Println("Try running the app again")
 		return
 	}
 
