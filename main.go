@@ -59,6 +59,10 @@ const (
 
 // Lists all tasks provided
 func listTasks(tasks []*Task) {
+	if len(tasks) == 0 {
+		fmt.Println("You don't have any tasks")
+		return
+	}
 	for _, task := range tasks {
 		// Parse the createdAt and updatedAt fields (assuming customTimeFormat)
 		createdAt, err := time.Parse(customTimeFormat, task.CreatedAt)
