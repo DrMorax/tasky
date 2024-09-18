@@ -1,4 +1,4 @@
-#Tasky
+# Tasky
 
 A CLI TODO app built with pure Go
 
