@@ -231,8 +231,6 @@ func handleFile() ([]byte, error) {
 			return nil, err
 		}
 		fmt.Println("Initialized the file with an empty array.")
-	} else {
-		fmt.Println("File already has data or is not empty.")
 	}
 
 	bytes, err := io.ReadAll(file)
