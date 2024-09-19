@@ -290,7 +290,7 @@ func main() {
 		}
 	case "update":
 		if len(os.Args) < 4 {
-			fmt.Printf("Usage of 'update': tasky update <task id> <new task description>")
+			fmt.Printf("Usage of 'update': tasky update <task ID> <new task description>")
 		} else {
 			description := strings.Join(os.Args[3:], " ")
 			updateTask(os.Args[2], description)
@@ -311,7 +311,7 @@ func main() {
 		}
 	case "doing":
 		if len(os.Args) < 3 {
-			fmt.Printf("Usage of 'done': tasky done <task ID>")
+			fmt.Printf("Usage of 'doing': tasky doing <task ID>")
 		} else {
 			assignStatus(os.Args[2], inProgressStatus)
 		}
