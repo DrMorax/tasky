@@ -201,7 +201,7 @@ func assignStatus(idInput string, status string) {
 		return
 	}
 
-	fmt.Println("Task status successfully udpated to 'done'!")
+	fmt.Println("Task status successfully udpated to ", status)
 }
 
 func saveTask(filePath string, tasks []*Task) error {
